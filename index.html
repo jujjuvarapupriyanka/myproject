@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>dictionaryapi</title>
+    <style>
+        .container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 30px;
+    font-size: 30px;
+    background-color: #aaaaaa;
+    color: black;
+    border-radius: 15px;
+    
+}
+
+input[type="text"], button {
+    margin-bottom: 100px;
+    box-sizing: border-box;
+    padding: 20px;
+    box-shadow: 20px 10px 5px #191a19;
+    font-size: 15px;
+    
+}
+
+#wordDefinition, #synonyms, #antonyms, #translations, #exampleSentences, #pronunciation {
+    margin-top: 30px;
+    background-color: white;
+}
+#two {
+    font-size:25px;
+    color: #aaaaaa;
+    padding-top: 50px;
+}
+    </style>
+</head>
+<body>
+    <div>
+        <marquee id="two">I WILL HELP TO YOU FOR SEARCHING DEFINITION OF YOUR WORD</marquee>
+    </div>
+    
+        
+    <div class="container">
+        <h1>Dictionary</h1>
+        <input type="text" id="wordInput" placeholder="Please Enter a word.......">
+        <button onclick="searchWord()">Search</button>
+        <div id="wordDefinition"></div>
+        <div id="synonyms"></div>
+        <div id="antonyms"></div>
+        <div id="translations"></div>
+        <div id="exampleSentences"></div>
+        <div id="pronunciation"></div>
+    </div>
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <script>
+
+function searchWord() {
+    const word = document.getElementById("wordInput").value;
+    fetch("https://api.dictionaryapi.dev/api/v2/entries/en/" + word)
+    .then(response => response.json())
+    .then(data => {
+        const wordDefinition = document.getElementById("wordDefinition");
+        const synonyms = document.getElementById("synonyms");
+        const antonyms = document.getElementById("antonyms");
+        const translations = document.getElementById("translations");
+        const exampleSentences = document.getElementById("exampleSentences");
+        const pronunciation = document.getElementById("pronunciation");
+
+    
+               if (data && data.length > 0) {
+            const definition = data[0].meanings[0].definitions[0].definition;
+            wordDefinition.innerHTML = "<strong>Definition:</strong>" + definition;
+
+            const synonymsList = data[0].meanings[0].definitions[0].synonyms;
+            if (synonymsList && synonymsList.length > 0) {
+                synonyms.innerHTML = "<strong>Synonyms:</strong>" + synonymsList.join(", ");
+            }
+
+            const antonymsList = data[0].meanings[0].definitions[0].antonyms;
+            if (antonymsList && antonymsList.length > 0) {
+                antonyms.innerHTML = "<strong>Antonyms:</strong>" + antonymsList.join(", ");
+            }
+
+            const translationsList = data[0].meanings[0].definitions[0].translations;
+            if (translationsList && translationsList.length > 0) {
+                translations.innerHTML = "<strong>Translations:</strong>" + translationsList.join(", ");
+            }
+
+            const exampleSentencesList = data[0].meanings[0].definitions[0].exampleSentences;
+            if (exampleSentencesList && exampleSentencesList.length > 0) {
+                exampleSentences.innerHTML = "<strong>Example Sentences:</strong>" + exampleSentencesList.join(", ");
+            }
+
+            const pronunciationText = data[0].phonetics[0].text;
+            pronunciation.innerHTML = "<strong>Pronunciation:</strong>" + pronunciationText;
+        } else {
+            document.getElementById("wordDefinition").innerHTML = "Word not found!";
+        }
+    })
+    .catch(error => {
+        console.error("Error fetching data:", error);
+        document.getElementById("wordDefinition").innerHTML = "An error occurred while fetching data.";
+
+
+
+        wordDefinition.innerHTML = "";
+        synonyms.innerHTML = "";
+        antonyms.innerHTML = "";
+        translations.innerHTML = "";
+        exampleSentences.innerHTML = "";
+        pronunciation.innerHTML = "";
+
+
+
+
+
+
+
+
+
+    });
+
+
+
+
+
+   
+
+}
+
+
+
+
+
+
+
+
+
+
+
+    </script>
+</body>
+</html>
