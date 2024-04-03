@@ -3,68 +3,88 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>dictionaryapi</title>
+    <title>Dictionary API</title>
     <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
         .container {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 30px;
-    font-size: 30px;
-    background-color: #aaaaaa;
-    color: black;
-    border-radius: 15px;
+            width: 80%;
+            max-width: 800px;
+            padding: 30px;
+            background-color: #ffffff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            text-align: center;
+        }
     
-}
 
-input[type="text"], button {
-    margin-bottom: 100px;
-    box-sizing: border-box;
-    padding: 20px;
-    box-shadow: 20px 10px 5px #191a19;
-    font-size: 15px;
-    
-}
+        h1 {
+            color: #333333;
+        }
+        h1:hover {
+            background-color: #aebfdd;
+        }
 
-#wordDefinition, #synonyms, #antonyms, #translations, #exampleSentences, #pronunciation {
-    margin-top: 30px;
-    background-color: white;
-}
-#two {
-    font-size:25px;
-    color: #aaaaaa;
-    padding-top: 50px;
-}
+        input[type="text"], button {
+            margin-bottom: 20px;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #dddddd;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        input:hover{
+            background-color: #8fb1ec;
+        }
+
+        button {
+            background-color: #007bff;
+            color: #ffffff;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #010913;
+        }
+
+        .result {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #f9f9f9;
+            border: 1px solid #dddddd;
+            border-radius: 5px;
+        }
+        .result:hover{
+            background-color: #8fb1ec;
+        }
+
+        .error {
+            color: #dc3545;
+        }
     </style>
 </head>
 <body>
-    <div>
-        <marquee id="two">I WILL HELP TO YOU FOR SEARCHING DEFINITION OF YOUR WORD</marquee>
-    </div>
-    
-        
     <div class="container">
         <h1>Dictionary</h1>
-        <input type="text" id="wordInput" placeholder="Please Enter a word.......">
+        <input type="text" id="wordInput" placeholder="Enter a word...">
         <button onclick="searchWord()">Search</button>
-        <div id="wordDefinition"></div>
-        <div id="synonyms"></div>
-        <div id="antonyms"></div>
-        <div id="translations"></div>
-        <div id="exampleSentences"></div>
-        <div id="pronunciation"></div>
+        <div id="wordDefinition" class="result"></div>
+        <div id="synonyms" class="result"></div>
+        <div id="antonyms" class="result"></div>
+        <div id="translations" class="result"></div>
+        <div id="exampleSentences" class="result"></div>
+        <div id="pronunciation" class="result"></div>
     </div>
-
-    
-
-
-
-
-
-
-
-
-
-
 
     <script>
 
